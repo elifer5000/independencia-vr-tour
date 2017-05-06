@@ -1,0 +1,157 @@
+<html>
+<head>
+	<script src="lib/aframe.js"></script>
+	<script src="lib/aframe-animation-component.js"></script>
+  <script src="lib/aframe-event-set-component.js"></script>
+  <script src="lib/aframe-layout-component.js"></script>
+  <script src="lib/aframe-template-component.js"></script>
+  <script src="components/template-swap.js"></script>
+	<!-- <script src="components/set-image.js"></script> -->
+</head>
+<body>
+    <a-scene>
+      <!-- Templates. -->
+      <a-assets>
+        <audio id="bg-sound1" src="assets/bird-rain.mp3" preload="auto"></audio>
+        <audio id="bg-sound2" src="assets/backgroundnoise.wav" preload="auto"></audio>
+        <audio id="click-sound" crossorigin="anonymous" src="assets/click.ogg"></audio>
+        <!-- 360 images -->
+        <img id="entry-img" src="./assets/entry.jpg">
+        <img id="room1-img" src="./assets/room1.jpg">
+        <img id="room2-img" src="./assets/room2.jpg">
+        <img id="room3-img" src="./assets/room3.jpg">
+        <img id="room4-img" src="./assets/room4.jpg">
+        <img id="room5-img" src="./assets/room5.jpg">
+        <img id="room6-img" src="./assets/room6.jpg">
+        <img id="patio1-img" src="./assets/patio1.jpg">
+        <img id="patio2-img" src="./assets/patio2.jpg">
+        <img id="patio3-img" src="./assets/patio3.jpg">
+        <img id="alley-img" src="./assets/alley.jpg">
+        <!-- flat images -->
+        <img id="room1-letter" src="./assets/room1-letter.jpg">
+
+        <script id="close-up-link" type="text/html">
+          <a-entity class="link"
+            position = "${x} ${y} ${z}"
+            geometry="primitive: sphere; radius: ${rad}"
+            material="color: #F5E0F3;  metalness: 0.3;"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1.2"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            sound="on: click; src: #click-sound"
+            show-closeup>
+           <a-animation attribute="position" to="${x} ${yAnim} ${z}" direction="alternate" dur="1000" repeat="indefinite"></a-animation>
+  
+          </a-entity>
+        </script>
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            position = "${x} ${y} ${z}"
+            geometry="primitive: sphere; radius: ${rad}"
+            material="color: #F5E0C3;  metalness: 0.8; sphericalEnvMap: ${src}-img"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1.2"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            template-swap="${src}"
+            sound="on: click; src: #click-sound">
+           <a-animation attribute="position" to="${x} ${yAnim} ${z}" direction="alternate" dur="1000" repeat="indefinite"></a-animation>
+  
+          </a-entity>
+        </script>
+
+        <script id="entry" type="text/html">
+          <a-entity rotation="0 90 0">
+            <a-sky radius="10" src="#entry-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room1" data-rad=0.9 data-x=1.288 data-y=-1.573 data-z=10.152 data-y-anim=-1.373></a-entity>
+            <a-entity template="src: #link" data-src="#patio1" data-rad=0.7 data-x=9.068 data-y=-1.377 data-z=-2.055 data-y-anim=-1.177></a-entity>
+          </a-entity>
+        </script>
+        <script id="room1" type="text/html">
+          <a-entity rotation="0 270 0">
+            <a-sky radius="10" src="#room1-img"></a-sky>
+            <a-entity template="src: #link" data-src="#entry" data-rad=0.7 data-x=0.667 data-y=-1.397 data-z=9.634 data-y-anim=-1.197></a-entity>
+            <a-entity template="src: #link" data-src="#room2" data-rad=0.6 data-x=-0.372 data-y=-1.375 data-z=-9.905 data-y-anim=-1.175></a-entity>
+            <a-entity template="src: #close-up-link" data-src="#room1" data-rad=0.3 data-x=-5.001 data-y=-0.076 data-z=8.004 data-y-anim=0.126></a-entity>
+          </a-entity>
+        </script>
+        <script id="room2" type="text/html">
+          <a-entity>
+            <a-sky radius="10" src="#room2-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room1" data-rad=0.7 data-x=-8.793 data-y=-1.367 data-z=-0.696 data-y-anim=-1.197></a-entity>
+            <a-entity template="src: #link" data-src="#room3" data-rad=0.6 data-x=-2.846 data-y=-1.175 data-z=-9.331 data-y-anim=-0.975></a-entity>
+          </a-entity>
+        </script>
+        <script id="room3" type="text/html">
+          <a-entity>
+            <a-sky radius="10" src="#room3-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room2" data-rad=0.7 data-x=-2.254 data-y=-1.346 data-z=8.426 data-y-anim=-1.146></a-entity>
+            <a-entity template="src: #link" data-src="#room4" data-rad=0.6 data-x=-2.846 data-y=-1.175 data-z=-9.331 data-y-anim=-0.975></a-entity>
+          </a-entity>
+        </script>
+        <script id="room4" type="text/html">
+          <a-entity rotation="0 270 0">
+            <a-sky radius="10" src="#room4-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room3" data-rad=0.7 data-x=8.7074 data-y=-1.273 data-z=-0.381 data-y-anim=-1.073></a-entity>
+            <a-entity template="src: #link" data-src="#room5" data-rad=0.6 data-x=3.612 data-y=-0.847 data-z=7.381 data-y-anim=-0.647></a-entity>
+          </a-entity>
+        </script>
+        <script id="room5" type="text/html">
+          <a-entity rotation="0 135 0">
+            <a-sky radius="10" src="#room5-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room4" data-rad=0.7 data-x=-0.796 data-y=-1.078 data-z=9.132 data-y-anim=-0.878></a-entity>
+          </a-entity>
+        </script>
+        <script id="room6" type="text/html">
+          <a-entity rotation="0 90 0">
+            <a-sky radius="10" src="#room6-img"></a-sky>
+             <a-entity template="src: #link" data-src="#patio1" data-rad=0.7 data-x=-0.194 data-y=-1.243 data-z=7.960 data-y-anim=-1.043></a-entity>
+            <a-entity template="src: #link" data-src="#alley" data-rad=0.5 data-x=9.095 data-y=0.176 data-z=-3.453 data-y-anim=-0.376></a-entity>
+        </a-entity>
+        </script>
+         <script id="patio1" type="text/html">
+          <a-entity rotation="0 -60 0">
+            <a-sky radius="10" src="#patio1-img"></a-sky>
+            <a-entity template="src: #link" data-src="#entry" data-rad=0.7 data-x=8.707 data-y=-0.408 data-z=-1.277 data-y-anim=-0.208></a-entity>
+            <a-entity template="src: #link" data-src="#room6" data-rad=0.6 data-x=-1.966 data-y=-0.777 data-z=7.662 data-y-anim=-0.577></a-entity>
+            <a-entity template="src: #link" data-src="#patio2" data-rad=0.5 data-x=-8.263 data-y=-0.959 data-z=-1.867 data-y-anim=-0.759></a-entity>
+          </a-entity>
+        </script>
+        <script id="patio2" type="text/html">
+          <a-entity rotation="0 -60 0">
+            <a-sky radius="10" src="#patio2-img"></a-sky>
+            <a-entity template="src: #link" data-src="#patio1" data-rad=0.5 data-x=8.707 data-y=-0.408 data-z=-1.277 data-y-anim=-0.208></a-entity>
+            <a-entity template="src: #link" data-src="#room6" data-rad=0.4 data-x=6.361 data-y=-0.775 data-z=6.112 data-y-anim=-0.575></a-entity>
+            <a-entity template="src: #link" data-src="#patio3" data-rad=0.4 data-x=-4.460 data-y=-1.102 data-z=6.409 data-y-anim=-0.902></a-entity>
+        </a-entity>
+        </script>
+        <script id="patio3" type="text/html">
+          <a-entity rotation="0 -15 0">
+            <a-sky radius="10" src="#patio3-img"></a-sky>
+            <a-entity template="src: #link" data-src="#patio2" data-rad=0.5 data-x=6.444 data-y=-0.402 data-z=6.262 data-y-anim=-0.202></a-entity>
+        </a-entity>
+        </script>
+        <script id="alley" type="text/html">
+          <a-entity rotation="0 120 0">
+            <a-sky radius="10" src="#alley-img"></a-sky>
+            <a-entity template="src: #link" data-src="#room6" data-rad=0.7 data-x=-8.265 data-y=-0.816 data-z=1.107 data-y-anim=-0.616></a-entity>
+        </a-entity>
+        </script>
+
+      </a-assets>   
+
+      <a-entity id="main" template="src: #entry"></a-entity>
+
+      <a-sky id="mask" color="#111" opacity="0" radius="2">
+        <a-animation attribute="material.opacity" begin="fade" from="0" to="1" dur="500" direction="alternate" repeat="1"></a-animation>
+      </a-sky>
+
+      <a-entity id="camera" camera look-controls sound="src: #bg-sound1; autoplay: true; loop: true; volume: 0.25">
+        <a-cursor id="cursor" color="yellow" animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150" animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500" event-set__1="_event: mouseenter; color: springgreen" event-set__2="_event: mouseleave; color: yellow" fuse="false" raycaster="objects: .link">
+        </a-cursor>
+        <a-image id="close-up" src="#room1-letter" width="1.50" height="1.17" position="0 0 -1" visible="false" opacity="0.95"></a-image>
+      </a-entity>
+    </a-scene>
+</body>
+</html>
